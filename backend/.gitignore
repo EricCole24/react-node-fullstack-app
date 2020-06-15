@@ -1,0 +1,39 @@
+<<<<<<< HEAD
+node_modules
+<<<<<<< HEAD
+
+app.js
+database.js
+users.js
+PasswordHash.js
+SignUpRoute.js
+=======
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+>>>>>>> cff04f052dae502c74ce6d440a47c6162b42db32
+=======
+tsconfig.json
+package-lock.json
+
+>>>>>>> backendserver
