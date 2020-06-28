@@ -4,7 +4,7 @@ import { RouteComponentProps } from "react-router-dom";
 import SignInForm from "./SignInForm";
 import axios from "axios";
 import { toast } from "react-toastify";
-import useUserStatus from "./userLoggedIn";
+//import useUserStatus from "./userLoggedIn";
 const ManageSignIn: React.FC<RouteComponentProps> = (props) => {
   const [signInData, setSignInData] = useState<signIn>({
     email: "",
@@ -44,12 +44,13 @@ const ManageSignIn: React.FC<RouteComponentProps> = (props) => {
           if (result.data) {
             console.log("ooooo ", result.data);
             localStorage.setItem("user", JSON.stringify(result.data));
-            console.log("abiiiie", result.headers);
-            toast.success("login successful");
+            console.log("abiiiie", result.data);
             clearState();
 
             props.history.push("/");
-            window.location.reload(false);
+            return window.location.reload(false);
+
+            //let s = JSON.parse(localStorage.getItem("user") as string);
           }
         },
         (error) => {

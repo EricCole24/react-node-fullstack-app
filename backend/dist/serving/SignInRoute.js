@@ -14,8 +14,9 @@ const router = () => {
         let { _id, email, password, confirmPassword } = req.user;
         console.log(email, _id);
         const token = jsonwebtoken_1.default.sign({ id: email }, config_1.default.secret);
-        return res.status(200).send({
+        res.status(200).send({
             auth: true,
+            email: email,
             token: token,
             message: "user found and loggoed in",
             id: _id,

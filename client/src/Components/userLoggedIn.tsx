@@ -22,7 +22,6 @@ const useUserStatus = () => {
     getData();
   }, []);
 
-  console.log(user);
   return user;
 };
 

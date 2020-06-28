@@ -19,8 +19,6 @@ const ManageSignUp: React.FC<RouteComponentProps> = (props) => {
     passwordError: "",
     confirmPasswordError: "",
   });
-
-  //const history = createBrowserHistory({ forceRefresh: true });
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     let updatedRegistrationData = {
       ...registrationInputData,
@@ -36,25 +34,25 @@ const ManageSignUp: React.FC<RouteComponentProps> = (props) => {
     let confirmPasswordError = "";
     const url = "http://localhost:5000/signupform";
     if (!registrationInputData.email) {
-      emailError = "invalid email";
+      emailError = "Email cannot be empty";
     }
     if (!registrationInputData.username) {
-      usernameError = "invalid username";
+      usernameError = "Username cannot be empty";
     }
     if (!registrationInputData.password) {
-      passwordError = "invalid password";
+      passwordError = "Password cannot be empty";
     }
     if (!registrationInputData.cpassword) {
-      confirmPasswordError = "passwords must match";
+      confirmPasswordError = "Confirm Password cannot be empty";
     }
     if (
       registrationInputData.password.length! > 0 &&
       registrationInputData.password.length < 5
     ) {
-      passwordError = "length of password must be 8 characters long";
+      passwordError = "Length of password must be 8 characters long";
     }
     if (registrationInputData.password !== registrationInputData.cpassword) {
-      confirmPasswordError = "Password must match confirm password";
+      confirmPasswordError = "Password must match Confirm password";
     }
     if (emailError || usernameError || passwordError || confirmPasswordError) {
       setError({
@@ -65,7 +63,6 @@ const ManageSignUp: React.FC<RouteComponentProps> = (props) => {
       });
     } else {
       try {
-        console.log("boooy ");
         let response = await axios({
           method: "post",
           url: url,
@@ -77,14 +74,12 @@ const ManageSignUp: React.FC<RouteComponentProps> = (props) => {
         }).then(
           (response) => {
             if (response.statusText === "OK") {
-              console.log(" ooooooo ", " " + response.data);
               toast.success(response.data);
               clearState();
               return props.history.push("/");
             }
           },
           (error) => {
-            console.log("ogogogog ");
             emailError = "email already exist";
             if (error) {
               console.log("dbk ", emailError);

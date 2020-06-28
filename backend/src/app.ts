@@ -24,11 +24,13 @@ app.use(passport.session());
 import signup = require("./serving/SignUpRoute");
 import signin = require("./serving/SignInRoute");
 import logout = require("./serving/Logout");
-
+import testdb = require("./serving/users");
+import mong = require("./serving/getUser");
 app.use(signup());
 app.use(signin());
 app.use(logout());
-
+app.use(testdb());
+app.use(mong());
 app.get("/", (req: Request, res: Response) => {
   console.log("hi");
   res.send("helllll world");

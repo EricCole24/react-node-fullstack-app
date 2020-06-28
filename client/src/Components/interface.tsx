@@ -3,10 +3,6 @@ export interface data {
   username: string;
   password: string;
   cpassword: string;
-  //emailError: string;
-  //usernameError: string;
-  //passwordError: string;
-  //confirmPasswordError: string;
 }
 
 export interface Props {
@@ -15,10 +11,6 @@ export interface Props {
     username: string;
     password: string;
     cpassword: string;
-    //emailError: string;
-    //usernameError: string;
-    //passwordError: string;
-    //confirmPasswordError: string;
   };
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;

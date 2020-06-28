@@ -1,11 +1,27 @@
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, RouteComponentProps } from "react-router-dom";
 import useUserStatus from "../userLoggedIn";
 import { Route } from "react-router-dom";
-const Header2: React.FC = (props) => {
+import axios from "axios";
+interface Props {}
+const Header2: React.FC<Props> = (props) => {
   const status = useUserStatus();
-  const islog = status;
-
+  let islog = status;
+  const logOut = async () => {
+    const url = "http://localhost:5000/logout";
+    try {
+      let response = await axios(url);
+      if (response.status === 200) {
+        localStorage.removeItem("user");
+        console.log(response.data);
+        return window.location.reload();
+      } else {
+        throw console.error();
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <nav
       className="navbar navbar-expand-lg navbar-light bg-dark"
@@ -18,12 +34,44 @@ const Header2: React.FC = (props) => {
         About
       </NavLink>
       <NavLink
-        style={{ color: "white", float: "right" }}
-        className="navbar-brand navbar-nav ml-auto"
-        to="/logout"
+        style={{ color: "white" }}
+        className="navbar-brand "
+        to="/bookappointment"
         activeClassName="selectedLink"
       >
-        {islog.authenticate ? "Logout" : " "}
+        {islog.authenticate ? "ScheduleAppointment" : " "}
+      </NavLink>
+      <NavLink
+        style={{ color: "white" }}
+        className="navbar-brand "
+        to="/details"
+        activeClassName="selectedLink"
+      >
+        {islog.authenticate ? "Details" : " "}
+      </NavLink>
+      <NavLink
+        onClick={logOut}
+        style={{ color: "white", float: "right" }}
+        className="navbar-brand navbar-nav ml-auto "
+        to=""
+        activeClassName="selectedLink"
+      >
+        {islog.authenticate ? (
+          <div>
+            <button
+              className="btn btn-secondary "
+              type="button"
+              id="dropdownMenuButton"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Logout
+            </button>
+          </div>
+        ) : (
+          " "
+        )}
       </NavLink>
     </nav>
   );

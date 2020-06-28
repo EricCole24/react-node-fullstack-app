@@ -1,13 +1,11 @@
 import React from "react";
-import { BrowserRouter as Router } from "react-router-dom";
-
+import tedd from "../images/tedd1.jpg";
 const AboutPage = () => {
   return (
-    <div className="jumbotron">
-      <h1> About Page</h1>
-      <p> This is the about page of the site</p>
+    <div className="container jumbotron">
+      <h1>About page</h1>
+      <p>Details coming soon</p>
     </div>
   );
 };
-
 export default AboutPage;

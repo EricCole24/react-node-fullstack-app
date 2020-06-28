@@ -20,8 +20,9 @@ const router = () => {
 
         console.log(email, _id);
         const token = jwt.sign({ id: email }, config.secret);
-        return res.status(200).send({
+        res.status(200).send({
           auth: true,
+          email: email,
           token: token,
           message: "user found and loggoed in",
           id: _id,

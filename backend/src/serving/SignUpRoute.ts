@@ -5,11 +5,10 @@ import Debug from "debug";
 import mongoose = require("mongoose");
 import user from "./database";
 import { MongoClient } from "mongodb";
-//import hashUserPassword from "./PasswordHash";
+
 const debug = Debug("app:SignUpRoute");
 
 const signUpRoute = Router();
-
 const router = () => {
   signUpRoute.route("/signupform").post((req: Request, res: Response) => {
     const { email, username, password, cpassword } = req.body;
@@ -22,6 +21,7 @@ const router = () => {
         });
         let hashedPassword = hashUserPassword(password);
         let hashedConfirmPassword = hashUserPassword(cpassword);
+
         let newUser = new user({
           email: email,
           username: username,
@@ -34,14 +34,17 @@ const router = () => {
             console.log("got an error");
             res.status(400).send(err);
           } else if (result === 0) {
-            await newUser.save().then((result) => {
-              console.log("kilerrrr", result);
-              mongoose.connection.close();
-            });
-            console.log("result");
-            return res.status(200).send("user data saved successfully");
+            await newUser
+              .save()
+              .then((result) => {
+                mongoose.connection.close();
+                return res.send("Data inserted Successfully...!");
+              })
+              .catch((error) => {
+                return res.send(error);
+              });
           } else {
-            return res.status(500).json({ message: "somethings broke" });
+            return res.status(500).json({ message: "user exists" });
           }
         });
       } catch (error) {
