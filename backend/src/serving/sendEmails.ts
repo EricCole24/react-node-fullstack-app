@@ -1,8 +1,6 @@
 import mailgunLoader from "mailgun-js";
 
 let mailgun = mailgunLoader({
-  apiKey: "a4733cfe794a9abd31dfb2907df79f3e-1b6eb03d-c1c12415",
-  domain: "sandboxc1a5eb6132ee4777a52dc98336b9d89e.mailgun.org",
 });
 const sendEmail = (
   name: string,
